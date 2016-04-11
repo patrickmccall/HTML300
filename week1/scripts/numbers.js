@@ -11,7 +11,7 @@ $(document).ready(function () {
   ResetValues();
   //wire up form validator
   //$("#inputValue").on("keydown", Validate);
-  }
+}
   )
 
 
@@ -64,7 +64,7 @@ function UpdateValues() {
       //console.log(i + " sum after : " + meanSquaredArray[i]);
     }
     meanSquaredArray = [];
-    standardDeviation = Math.sqrt((sumSquaredDifferences/valueCount));
+    standardDeviation = Math.sqrt((sumSquaredDifferences / valueCount));
     $("#standardDeviation").html(standardDeviation);
 
 
@@ -75,10 +75,10 @@ function UpdateValues() {
     var half = Math.floor(inputArray.length / 2);
 
     if (inputArray.length % 2) {
-      $("#median").html( inputArray[half]);
+      $("#median").html(inputArray[half]);
     }
     else {
-      $("#median").html( (inputArray[half - 1] + inputArray[half]) / 2.0);
+      $("#median").html((inputArray[half - 1] + inputArray[half]) / 2.0);
     }
   }
     //it's not valid, let the user know
@@ -115,4 +115,4 @@ function Validate() {
   else
     $("#inputValue").addClass("error");
   console.log("validateFalse");
-  }
+}
