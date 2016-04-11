@@ -63,9 +63,23 @@ function UpdateValues() {
       sumSquaredDifferences += meanSquaredArray[i];
       //console.log(i + " sum after : " + meanSquaredArray[i]);
     }
-    
+    meanSquaredArray = [];
     standardDeviation = Math.sqrt((sumSquaredDifferences/valueCount));
     $("#standardDeviation").html(standardDeviation);
+
+
+    //median
+    //http://caseyjustus.com/finding-the-median-of-an-array-with-javascript
+    //sort the array and pick the middle number
+    inputArray.sort(function (a, b) { return a - b; });
+    var half = Math.floor(inputArray.length / 2);
+
+    if (inputArray.length % 2) {
+      $("#median").html( inputArray[half]);
+    }
+    else {
+      $("#median").html( (inputArray[half - 1] + inputArray[half]) / 2.0);
+    }
   }
     //it's not valid, let the user know
   else {
@@ -87,7 +101,8 @@ function ResetValues() {
   $("#count").html(valueCount);
   $("#sum").html(valueSum);
   $("#average").html(valueAverage);
-  $("#standardDeviation").html(standardDeviation);
+  $("#standardDeviation").html(null);
+  $("#median").html(null);
 }
 
 function Validate() {
