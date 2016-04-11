@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+  <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="scripts/numbers.js"></script>
+</head>
+<body>
+  <h1>Homework 1</h1>
+  <h2>Number Form</h2>
+  <p>Create a Web page with an input field where the user enters numbers.
+  <p>Each time the user enters a number, update the display to show how many numbers have been entered, the sum of the numbers, and the average of the numbers.</p>
+  <p>There should be a Reset button that allows the user to start over with a new sequence of numbers.</p>
+  <p>Your page should display an error message or otherwise prevent non-numeric input.</p>
+  <p>Optional features: display the standard deviation and/or median of the numbers entered</p>
+  <form>
+    <label>Please enter a number: </label><input type="text" id="inputValue" />
+    <label>Count:</label><label id="count"></label>
+    <label>Sum:</label><label id="sum"></label>
+    <label>Average:</label><label id="average" ></label>
+    <input type="button" name="submit" value="submit" onclick="UpdateValues()" />
+    <input type="button" name="reset" value="reset" onclick="ResetValues()" />
+  </form>
+
+
+</body>
+</html>
