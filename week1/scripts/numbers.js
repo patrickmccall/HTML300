@@ -1,6 +1,11 @@
 ﻿var valueCount = 0;
 var valueSum = 0;
 var valueAverage = "";
+var standardDeviation = 0;
+var median = 0;
+
+var inputArray = [];
+var meanSquaredArray = [];
 
 $(document).ready(function () {
   ResetValues();
@@ -12,6 +17,7 @@ $(document).ready(function () {
 
 function UpdateValues() {
   var inputValue;
+  var sumSquaredDifferences = 0;
 
   inputValue = $("#inputValue").val();
   console.log(inputValue);
@@ -20,25 +26,50 @@ function UpdateValues() {
   if ($.isNumeric(inputValue)) {
     //convert it to a number
     inputValue = Number(inputValue);
+
+    //add it to the inputArray, we'll need it later
+    inputArray.push(inputValue);
+
     //console.log("success");
     //Keep track of the counts and update the page
     valueCount++;
-    console.log("count: " + valueCount);
+    //console.log("count: " + valueCount);
     $("#count").html(valueCount);
 
     //do the same for the running total (sum) of the values
     valueSum += inputValue;
-    console.log("  sum: " + valueSum);
+    //console.log("  sum: " + valueSum);
     $("#sum").html(valueSum);
 
-    //finally compute the average using the two variables sum divided by count
+    //compute the average using the two variables sum divided by count
     valueAverage = valueSum / valueCount;
-    console.log("  avg: " + valueAverage);
+    //console.log("  avg: " + valueAverage);
     $("#average").html(valueAverage);
+
+    //standard deviation
+    //http://www.mathsisfun.com/data/standard-deviation-formulas.html
+    //Work out the Mean (the simple average of the numbers)
+    valueAverage
+
+    //for each number: subtract the Mean and square the result
+    for (var i in inputArray) {
+      //console.log(i + " before : " + inputArray[i]);
+      meanSquaredArray.push(Math.pow((inputArray[i] - valueAverage), 2));
+      //console.log(i + " after : " + inputArray[i]);
+    }
+    //Then work out the mean of those squared differences 
+    for (var i in meanSquaredArray) {
+      //console.log(i + " sum before : " + meanSquaredArray[i]);
+      sumSquaredDifferences += meanSquaredArray[i];
+      //console.log(i + " sum after : " + meanSquaredArray[i]);
+    }
+    
+    standardDeviation = Math.sqrt((sumSquaredDifferences/valueCount));
+    $("#standardDeviation").html(standardDeviation);
   }
     //it's not valid, let the user know
   else {
-    console.log("fail");
+    //console.log("fail");
     alert("please enter a number");
 
   }
@@ -48,10 +79,15 @@ function ResetValues() {
   valueCount = 0;
   valueSum = 0;
   valueAverage = "";
+  inputArray = [];
+  meanSquaredArray = [];
+  standardDeviation = 0;
+  $("#inputValue").val(null);
 
   $("#count").html(valueCount);
   $("#sum").html(valueSum);
   $("#average").html(valueAverage);
+  $("#standardDeviation").html(standardDeviation);
 }
 
 function Validate() {
