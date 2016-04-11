@@ -2,7 +2,12 @@
 var valueSum = 0;
 var valueAverage = "";
 
-$(document).ready(ResetValues)
+$(document).ready(function () {
+  ResetValues();
+  //wire up form validator
+  //$("#inputValue").on("keydown", Validate);
+  }
+  )
 
 
 function UpdateValues() {
@@ -31,10 +36,10 @@ function UpdateValues() {
     console.log("  avg: " + valueAverage);
     $("#average").html(valueAverage);
   }
-  //it's not valid, let the user know
+    //it's not valid, let the user know
   else {
     console.log("fail");
-    //alert("please enter a number")
+    alert("please enter a number");
 
   }
 }
@@ -48,3 +53,15 @@ function ResetValues() {
   $("#sum").html(valueSum);
   $("#average").html(valueAverage);
 }
+
+function Validate() {
+  inputValue = $("#inputValue").val();
+  //console.log("validate");
+  if ($.isNumeric(inputValue)) {
+    console.log("validateTrue");
+    $("#inputValue").removeClass("error");
+  }
+  else
+    $("#inputValue").addClass("error");
+  console.log("validateFalse");
+  }

@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
   <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script src="scripts/numbers.js"></script>
+  <link rel="stylesheet" href="styles/StyleSheet.css" />
 </head>
 <body>
   <h1>Homework 1</h1>
@@ -15,14 +16,26 @@
   <p>Your page should display an error message or otherwise prevent non-numeric input.</p>
   <p>Optional features: display the standard deviation and/or median of the numbers entered</p>
   <form>
-    <label>Please enter a number: </label><input type="text" id="inputValue" />
-    <label>Count:</label><label id="count"></label>
-    <label>Sum:</label><label id="sum"></label>
-    <label>Average:</label><label id="average" ></label>
-    <input type="button" name="submit" value="submit" onclick="UpdateValues()" />
-    <input type="button" name="reset" value="reset" onclick="ResetValues()" />
+    <div class="inputValue">
+      <label>Please enter a number: </label><input type="text" id="inputValue"  />
+    </div>
+    <div class="results">
+      <label >Count: </label><label id="count"></label>
+    </div>
+    <div class="results">
+      <label >Sum: </label><label id="sum" ></label>
+    </div>
+    <div class="results">
+      <label >Average: </label><label id="average" ></label>
+    </div>
+    <div>
+      <input type="button" class="button" name="submit" value="submit" onclick="UpdateValues()" />
+      <input type="button" class="button" name="reset" value="reset" onclick="ResetValues()" />
+    </div>
   </form>
 
-
+<footer>
+  <p><a href="../index.html">return to main menu</a></p>
+</footer>
 </body>
 </html>
