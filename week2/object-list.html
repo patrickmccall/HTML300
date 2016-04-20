@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework 2 - Object List</title>
+	<meta charset="utf-8" />
+  <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="scripts/objects.js"></script>
+  <link rel="stylesheet" href="styles/StyleSheet.css" />
+</head>
+<body>
+  <h1>Homework 2</h1>
+  <h2>Object List</h2>
+  <div id="resultsTable">
+    <table>
+      <thead>
+        <tr>
+          <th>artist</th>
+          <th>album</th>
+          <th>year</th>
+          <th>label</th>
+          <th>running length</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <button type="button" id="insertRecord" name="insert" onclick="returnToInputForm()">insert</button>
+  </div>
+  <div id="inputForm">
+    <form>
+      <input type="text" id="recordId"  disabled />
+      <input type="text" id="artist" placeholder="artist" />
+      <input type="text" id="album" placeholder="album" />
+      <input type="text" id="year" placeholder="year" />
+      <input type="text" id="label" placeholder="label" />
+      <input type="text" id="running-length" placeholder="running-length" />
+      <button type="button" name="submit" onclick="addObject()">submit</button>
+    </form>
+  </div>
+  <footer>
+    <p><a href="../index.html">return to main menu</a></p>
+  </footer>
+</body>
+</html>
