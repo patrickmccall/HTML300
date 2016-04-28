@@ -77,6 +77,9 @@ function ResetValues() {
   inputArray = [];
   meanSquaredArray = [];
   standardDeviation = 0;
+  numbers = [];
+  strings = [];
+
   $("#inputValue").val(null);
 
   $("#count").html(valueCount);
