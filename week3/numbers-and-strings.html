@@ -3,6 +3,8 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+  <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="scripts/numstr.js"></script>
 </head>
 <body>
   <h1>HTML5 APIs Assignment 3: Numbers and Strings</h1>
@@ -11,18 +13,29 @@
   <p>There should be a Reset button that allows the user to start over with a new sequence of numbers.</p>
   <p>Optional feature: Determine, update, and display the frequency of words entered in the strings. Hints: Use an object where the property keys (names) will be the words you find, and the property values will be the number of times each is encountered. Split a string into an array of words. For each word in the array, if the word is already a property name, increment its value. Otherwise set the value to 1. To display the frequencies, get the object's keys and make a row in a table for each one.</p>
 
-
+  <p>Note: Whatever the user enters will be analyzed for string and numbers, you may enter a mixture of both in the text box.</p>
   <form>
     <label>Enter numbers or text:</label>
     <textarea id="textInput"></textarea>
-    <button id="btnSubmit">Submit</button>
-    <button id="btnReset">Reset</button>
+    <input type="button" class="button" name="submit" value="submit" onclick="UpdateValues()" />
+    <input type="button" class="button" name="reset" value="reset" onclick="ResetValues()" />
   </form>
   <section>
     <h3>The Numbers</h3>
+    <div class="results">
+      <label>Count: </label><label id="count"></label>
+    </div>
+    <div class="results">
+      <label>Sum: </label><label id="sum"></label>
+    </div>
+    <div class="results">
+      <label>Average: </label><label id="average"></label>
+    </div>
     <div id="numberResults"></div>
     <h3>The Strings</h3>
-    <div id="stringResults"></div>
+    <div id="stringResults">
+      <label>Concatenated: </label><label id="concatString"></label>
+    </div>
 
   </section>
   <script src="../scripts/google-analytics.js"></script>
