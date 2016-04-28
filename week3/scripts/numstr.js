@@ -84,4 +84,6 @@ function ResetValues() {
   $("#average").html(valueAverage);
   $("#standardDeviation").html(null);
   $("#median").html(null);
+  $("#concatString").html(null);
+  $("#textInput").html(null);
 }
