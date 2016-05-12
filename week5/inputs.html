@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Homework 5 - Inputs</title>
+  <meta charset="utf-8" />
+  <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  <!--<link rel="stylesheet" href="styles/StyleSheet.css" />-->
+</head>
+<body>
+  <h1>Homework 5</h1>
+  <h2>Inputs</h2>
+  <form>
+    <table name="inputs">
+      <thead>
+        <tr>
+          <td>Control Type</td>
+          <td>Control</td>
+          <td>Value Entered</td>
+        </tr>
+      </thead>
+      <tr>
+        <td><code>input type="checkbox"</code></td>
+        <td><input type="checkbox" id="checkBox" /></td>
+        <td><label id="checkboxValue"></label></td>
+      </tr>
+      <tr>
+        <td><code>input type="radio"</code></td>
+        <td>
+            <input type="radio" name="radio" id="radio" value="radio" /> radio
+            <input type="radio" name="radio" id="radio" value="television" /> television
+            <input type="radio" name="radio" id="radio" value="theater" /> theater
+        </td>
+        <td><label id="radioValue"></label></td>
+      </tr>
+      <tr>
+        <td><code>input type="text"</code></td>
+        <td><input type="text" id="textBox" /></td>
+        <td><label id="textboxValue"></label></td>
+      </tr>
+      <tr>
+        <td><code>textarea</code></td>
+        <td><textarea id="textarea"></textarea></td>
+        <td><label id="textareaValue"></label></td>
+      </tr>
+      <tr>
+        <td><code>select</code></td>
+        <td>
+          <select id="select" value="select">
+            <option value="1st">first</option>
+            <option value="2nd">second</option>
+            <option value="3rd">third</option>
+            <option value="4th">fourth</option>
+          </select>
+        </td>
+        <td><label id="radioValue"></label></td>
+      </tr>
+    </table>
+
+
+  </form>
+
+
+  <footer>
+    <p><a href="../index.html">return to main menu</a></p>
+  </footer>
+  <script src="/scripts/google-analytics.js"></script>
+  <script src="scripts/inputs.js"></script>
+</body>
+</html>
