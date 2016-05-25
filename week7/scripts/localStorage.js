@@ -43,7 +43,7 @@ function GetSettings() {
   var settings = "";
   if (value != null) {
     settings = JSON.parse(value);
-    $("#name").html(settings["name"]);
+    $("#name").html("Welcome "  + settings["name"]);
   }
   else {
     //there's nothing, so go to the settings input page
@@ -65,16 +65,9 @@ function GoTo(evt) {
       location.href = "form-page.html";
     case "clearSettings":
       ClearSettings();
-      GetSettings();
+      $("#name").html("Name Setting Not Set");
     default: location.href = "#";
 
   }
-  //if (evt.target.id == "editSettings") {
-  //  console.log(evt.target.id);
-  //  location.href = "http://www.google.com";
-  //}
-
-  //evt.preventDefault();
-  //e.stopPropagation();
 
 }
