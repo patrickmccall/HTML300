@@ -9,8 +9,9 @@ $(document).ready(function () {
 
   //check if there is something in local storage and get it
   // but only if we're on the hello page
-  var url = window.location.pathname ;
-  if (url == "/week7/hello-page.html" ) {
+  var url = window.location.href;
+  var path = url.match(/([^\/]*)\/*$/)[1]
+  if (path == "hello-page.html") {
     GetSettings();
   }
 
