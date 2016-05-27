@@ -1,6 +1,9 @@
 ﻿var objLocation = new Object;
 objLocation["latLng"] = [];
 var myMap = new Object;
+var marker;
+var markers = [];
+var layerGroup = new Object;
 
 $(document).ready(function () {
   
@@ -23,7 +26,8 @@ function getLocation() {
           objLocation["latLng"] = coordinates
           
           initializeMap();
-          getBusinesses();
+         
+          getBusinesses(objLocation.coords.latitude,objLocation.coords.longitude);
         },
         function errorCallback(error) {
           var message;
@@ -67,13 +71,13 @@ function initializeMap() {
   myMap.on('moveend', moveEnd);
 }
 
-function getBusinesses() {
+function getBusinesses(lat, lng) {
   $.ajax(
   {
     crossDomain: true,
     type: 'POST',
     url: 'https://healthinspectionmap.azurewebsites.net/HealthInspections.asmx/GetBusinesses',
-    data: { latitude: objLocation.coords.latitude , longitude: objLocation.coords.longitude },
+    data: { latitude: lat , longitude: lng },
     contentType: "application/json; charset=utf-8",
     dataType: 'jsonp',
     success: updateMapMarkers
@@ -87,12 +91,20 @@ function getBusinesses() {
 }
 
 function updateMapMarkers(data) {
+
   for (var i = 0; i < data.length; i++) {
     latLng = JSON.parse('[' + data[i].latitude + ',' + data[i].longitude + ']');
-    var marker = L.marker(latLng);
+    marker = new L.marker(latLng);
+
     marker.bindPopup(MakePopup(data[i]));
-    marker.addTo(myMap);
+    //marker.addTo(myMap);
+    //marker layer is added to the map
+    //add the marker to the layer
+    markers.push(marker);
+    
   }
+  layerGroup = L.layerGroup(markers)
+  layerGroup.addTo(myMap);
 }
 
 function MakePopup(place) {
@@ -103,7 +115,12 @@ function MakePopup(place) {
 function moveEnd() {
   console.log("move end");
   var currentLocation = myMap.getCenter();
-  objLocation.coords.latitude = currentLocation.lat;
-  objLocation.coords.longitude = currentLocation.lng;
-  getBusinesses();
+  
+  // remove the marker layer 
+  myMap.removeLayer(layerGroup);
+  markers = [];
+  // add the businesses to the map
+  getBusinesses(currentLocation.lat, currentLocation.lng );
 }
+
+//latitude: objLocation.coords.latitude , longitude: objLocation.coords.longitude },
