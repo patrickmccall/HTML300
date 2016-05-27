@@ -2,7 +2,7 @@
 var currentLocation ;
 
 $(document).ready(function () {
-getLocation();
+//getLocation();
   GetData();
   
 }
