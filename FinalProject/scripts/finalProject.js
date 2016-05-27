@@ -1,7 +1,10 @@
 ﻿var leafletMap;
+var currentLocation ;
 
 $(document).ready(function () {
+getLocation();
   GetData();
+  
 }
   )
 ;
@@ -45,7 +48,8 @@ function buildMap(places) {
     var place = places[0];
     var latLng = JSON.parse('[' + place.latitude + ',' + place.longitude + ']');
 
-    leafletMap.setView(latLng, 18);
+    //getLocation();
+    leafletMap.setView(currentLocation, 18);
 
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
@@ -67,6 +71,22 @@ function buildMap(places) {
 }
 
 function MakePopup(place) {
-  return  '<h4>' + place.name +  '</h4>' + 
-          '<h5>' + place.address +  '</h5>'
+  return '<h4>' + place.name + '</h4>' +
+          '<h5>' + place.address + '</h5>'
+}
+
+
+function getLocation() {
+
+  var position = {};
+
+  var navGeoLoc = navigator.geolocation;
+  if (navGeoLoc) {
+    position =  navGeoLoc.getCurrentPosition();
+  }
+  else {
+    console.log('No geolocation support');
+  }
+  console.log(position.coords.latitude);
+  //return currentLocation;
 }
