@@ -62,6 +62,9 @@ function initializeMap() {
   attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
   maxzoom: 19
 }).addTo(myMap);
+
+  //add the listener
+  myMap.on('moveend', moveEnd);
 }
 
 function getBusinesses() {
@@ -95,4 +98,12 @@ function updateMapMarkers(data) {
 function MakePopup(place) {
   return '<h4>' + place.name + '</h4>' +
           '<h5>' + place.address + '</h5>'
+}
+
+function moveEnd() {
+  console.log("move end");
+  var currentLocation = myMap.getCenter();
+  objLocation.coords.latitude = currentLocation.lat;
+  objLocation.coords.longitude = currentLocation.lng;
+  getBusinesses();
 }
