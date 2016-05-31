@@ -26,8 +26,11 @@ function getLocation() {
           objLocation["latLng"] = coordinates
           
           initializeMap();
-         
-          getBusinesses(objLocation.coords.latitude,objLocation.coords.longitude);
+          var objBounds = myMap.getBounds();
+          getBusinessesByBounds(objBounds._northEast.lat,
+                                objBounds._northEast.lng,
+                                objBounds._southWest.lat,
+                                objBounds._southWest.lng);
         },
         function errorCallback(error) {
           var message;
@@ -71,16 +74,24 @@ function initializeMap() {
   myMap.on('moveend', moveEnd);
 }
 
-function getBusinesses(lat, lng) {
+function getBusinessesByBounds(neLat, neLng, swLat, swLng) {
   $.ajax(
   {
     crossDomain: true,
     type: 'POST',
-    url: 'https://healthinspectionmap.azurewebsites.net/HealthInspections.asmx/GetBusinesses',
-    data: { latitude: lat , longitude: lng },
+    url: 'https://healthinspectionmap.azurewebsites.net/HealthInspections.asmx/GetBusinessesByBounds',
+    data: {
+      nelatitude: neLat,
+      nelongitude: neLng,
+      swLatitude: swLat,
+      swLongitude: swLng
+    },
     contentType: "application/json; charset=utf-8",
     dataType: 'jsonp',
-    success: updateMapMarkers
+    success: ajaxSuccess
+      //updateMapMarkers,
+      //        makeResultsTable
+            
     , error: logAjaxError
   });
 
@@ -88,6 +99,11 @@ function getBusinesses(lat, lng) {
     console.log('AJAX error. Status:', textStatus, 'error:', errorThrown);
   }
 
+}
+
+function ajaxSuccess(data) {
+  updateMapMarkers(data);
+              makeResultsTable(data)
 }
 
 function updateMapMarkers(data) {
@@ -105,10 +121,11 @@ function updateMapMarkers(data) {
   }
   layerGroup = L.layerGroup(markers)
   layerGroup.addTo(myMap);
+  
 }
 
 function MakePopup(place) {
-  return '<h4>' + place.name + '</h4>' +
+  return '<h4 id=' + place.business_id +'>' + place.name + '</h4>' +
           '<h5>' + place.address + '</h5>'
 }
 
@@ -120,7 +137,12 @@ function moveEnd() {
   myMap.removeLayer(layerGroup);
   markers = [];
   // add the businesses to the map
-  getBusinesses(currentLocation.lat, currentLocation.lng );
+  // figure out the bounds of the new map
+  var objBounds = myMap.getBounds();
+  getBusinessesByBounds(objBounds._northEast.lat,
+                        objBounds._northEast.lng,
+                        objBounds._southWest.lat,
+                        objBounds._southWest.lng);
 }
 
 //latitude: objLocation.coords.latitude , longitude: objLocation.coords.longitude },
