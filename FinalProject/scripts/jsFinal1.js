@@ -88,7 +88,7 @@ function getBusinessesByBounds(neLat, neLng, swLat, swLng) {
     },
     contentType: "application/json; charset=utf-8",
     dataType: 'jsonp',
-    success: ajaxSuccess
+    success: ajaxBusinessesSuccess
       //updateMapMarkers,
       //        makeResultsTable
             
@@ -101,7 +101,7 @@ function getBusinessesByBounds(neLat, neLng, swLat, swLng) {
 
 }
 
-function ajaxSuccess(data) {
+function ajaxBusinessesSuccess(data) {
   updateMapMarkers(data);
               makeResultsTable(data)
 }
@@ -145,4 +145,63 @@ function moveEnd() {
                         objBounds._southWest.lng);
 }
 
-//latitude: objLocation.coords.latitude , longitude: objLocation.coords.longitude },
+function getInspections(business_id) {
+  $.ajax(
+  {
+    crossDomain: true,
+    type: 'POST',
+    url: 'https://healthinspectionmap.azurewebsites.net/HealthInspections.asmx/GetInspectionsByBusinessId',
+    data: {
+      businessId: business_id
+    },
+    contentType: "application/json; charset=utf-8",
+    dataType: 'jsonp',
+    success: ajaxInspectionsSuccess
+    //updateMapMarkers,
+    //        makeResultsTable
+
+    , error: logAjaxError
+  });
+
+  function logAjaxError(jqXHR, textStatus, errorThrown) {
+    console.log('AJAX error. Status:', textStatus, 'error:', errorThrown);
+  }
+
+}
+
+function ajaxInspectionsSuccess(data) {
+  makeInspectionsTable(data)
+}
+
+function getViolations(inspection_id) {
+  $.ajax(
+  {
+    crossDomain: true,
+    type: 'POST',
+    url: 'https://healthinspectionmap.azurewebsites.net/HealthInspections.asmx/GetViolationsByInspectionId',
+    data: {
+      InspectionId: inspection_id
+    },
+    contentType: "application/json; charset=utf-8",
+    dataType: 'jsonp',
+    success: ajaxViolationsSuccess
+    //updateMapMarkers,
+    //        makeResultsTable
+
+    , error: logAjaxError
+  });
+
+  function logAjaxError(jqXHR, textStatus, errorThrown) {
+    console.log('AJAX error. Status:', textStatus, 'error:', errorThrown);
+  }
+
+}
+
+function ajaxInspectionsSuccess(data) {
+  makeInspectionsTable(data);
+}
+
+function ajaxViolationsSuccess(data) {
+  makeViolationsTable(data);
+
+}
