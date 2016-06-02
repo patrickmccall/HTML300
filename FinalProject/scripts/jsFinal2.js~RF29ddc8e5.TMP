@@ -303,7 +303,7 @@ function viewViolations(evt) {
   getViolations(inspection_id);
 }
 function makeViolationsTable(data) {
-  $(".inspection:not(#inspectionsHeader)").fadeOut();
+  $(".inspections").fadeOut();
 
   //sort the data by date
   //http://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
@@ -324,7 +324,7 @@ function makeViolationsTable(data) {
     //$("tr").on("click", viewDetails);
     $(".violations").append(dataRow);
     $(".violations").fadeIn();
-
+    $(".restaurant:not(#inspectionsHeader)").fadeOut();
   }
 
 }
@@ -338,8 +338,7 @@ function resetRestaurants() {
 
 function inspectionsHeader() {
   $(".restaurant:not(#restaurantHeader)").slideUp();
-  //$(".inspections").slideDown();
-  $(".inspection").slideDown();
+  $(".inspections").slideDown();
   $(".inspectionElement").slideDown();
   $(".violations").fadeOut();
 }

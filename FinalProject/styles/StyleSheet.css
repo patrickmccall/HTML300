@@ -1,0 +1,14 @@
+﻿
+.restaurantElement{
+  /*float:left;*/
+  width: 50%
+}
+
+
+
+.inspectionElement{
+  width: 33.3333%
+}
+.list-group-item{
+  /*clear:both;*/
+}
