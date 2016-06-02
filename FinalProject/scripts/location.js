@@ -5,7 +5,8 @@
 };
 
 var location = {
-lat:null, lng:null};
+  lat: null, lng: null
+};
 
 function success(pos) {
   var crd = pos.coords;
@@ -23,7 +24,7 @@ function error(err) {
 };
 
 function getLocation() {
-  
+
   navigator.geolocation.getCurrentPosition(success, error, options);
 
 }

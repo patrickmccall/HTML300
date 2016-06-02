@@ -19,16 +19,20 @@
     $("#restaurants").append(dataRow); 
   }
   // assign the event handler to the rows of the table
-  $("#restaurants tr").on("click", viewDetails);
+  $("#restaurants tr").on("click", viewInspections);
 
 
   //$("#resultsTable").css("display", "inline");
   //$("#inputForm").css("display", "none");
 }
 
-function viewDetails(evt) {
+function viewInspections(evt) {
   console.log(evt.currentTarget.id);
   var business_id = evt.currentTarget.id;
+  // change the label of the top level accordion
+  $("#results").html(evt.currentTarget.id)
+
+  // show the inspections table
   getInspections(business_id);
 }
 
@@ -66,6 +70,9 @@ function makeInspectionsTable(data) {
   }
   // assign the event handler to the rows of the table
   $("#inspections tr").on("click", viewViolations);
+
+  // collapse the top level accordion by clicking on the inspections
+  $("#inspectionsHeader").click();
 }
 
 function viewViolations(evt) {

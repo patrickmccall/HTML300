@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <style>
+    /* root element for accordion. decorated with rounded borders and gradient background image */
+.accordion {
+    background:#333;
+    width: 90%;
+    border:1px solid #333;    
+    -background:#666;
+}
+
+/* accordion header */
+.accordion h2 {
+    background:#ccc url('http://static.flowplayer.org/img/global/gradient/h30.png');
+    margin:0;
+    padding:5px 15px;
+    font-size:14px;
+    font-weight:normal;
+    border:1px solid #fff;
+    border-bottom:1px solid #ddd;
+    cursor:pointer;
+    color: #000;
+}
+
+/* currently active header */
+.accordion h2.current {
+    cursor:default;
+    background-color:#0f0;
+}
+
+/* accordion pane */
+.accordion .pane {
+    display:none;
+    
+    padding:15px;
+    color:#fff;
+    font-size:12px;
+}
+
+/* a title inside pane */
+.accordion .pane h3 {
+    font-weight:normal;
+    margin:0 0 -5px 0;
+    font-size:16px;
+    color:#999;
+}
+  </style>
+</head>
+<body>
+  <div class="accordion">
+    <h2>Level 1:1</h2>
+    <div class="pane">
+      <div class="accordion">
+        <h2>Level 2 : 1</h2>
+        <div class="pane">
+          <div class="accordion">
+            <h2>Set 1</h2>
+            <div class="pane">
+              <div class="accordion">
+                <h2>Test3</h2>
+                <div class="pane">
+                  [Pane Content]
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2>Level 2 : 1</h2>
+        <div class="pane">
+          <div class="accordion">
+            <h2>Set 1</h2>
+            <div class="pane">
+              <div class="accordion">
+                <h2>Test3</h2>
+                <div class="pane">
+                  [Pane Content]
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>Level 1:2</h2>
+    <div class="pane">
+      content
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      //Initialising Accordion
+      $(".accordion").tabs(".pane", {
+        tabs: '> h2',
+        effect: 'slide',
+        initialIndex: null
+      });
+
+      //The click to hide function
+      $(".accordion > h2").click(function () {
+        if ($(this).hasClass("current") && $(this).next().queue().length === 0) {
+          $(this).next().slideUp();
+          $(this).removeClass("current");
+        } else if (!$(this).hasClass("current") && $(this).next().queue().length === 0) {
+          $(this).next().slideDown();
+          $(this).addClass("current");
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
