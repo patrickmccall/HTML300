@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 function getLocation() {
                    
-  var navGeoLoc = Navigator.geolocation;
+  var navGeoLoc = navigator.geolocation;
 
   if (navGeoLoc) {
     navGeoLoc.getCurrentPosition(
