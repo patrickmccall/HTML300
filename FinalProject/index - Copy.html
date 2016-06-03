@@ -1,7 +1,7 @@
 ﻿<html>
 <head>
-  <title>Health Inspections</title>
-  <meta charset="utf-8" />
+    <title>Health Inspections</title>
+	<meta charset="utf-8" />
   <link rel="stylesheet" href="styles/leaflet.css" />
 
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
@@ -9,25 +9,34 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles/StyleSheet.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
   <span id="testJSON"></span>
   <div id="leaflet-map" style="height: 500px; position: relative;"></div>
+  <div id="accordion">
+    <h3 id="results">Results</h3>
+    <div class="results">
+      <table class="table table-hover">
 
+        <tbody id="restaurants"></tbody>
+      </table>
+    </div>
 
+    <h3 id="inspectionsHeader">Inspections</h3>
+    <div>
+      <table class="table table-responsive table-hover">
+        <tbody id="inspections"></tbody>
+      </table>
+    </div>
 
-  <div class="list-group restaurants">
-    <div class="list-group-item restaurant active" id="restaurantsHeader">RESTAURANTS</div>
-  </div>
-
-  <div class="list-group inspections" hidden="hidden">
-    
-  </div>
-
-  <div class="list-group violations" hidden="hidden">
-
+    <h3 id="violationsHeader">Violations</h3>
+    <div>
+      <table class="table table-responsive table-hover">
+        <tbody id="violations"></tbody>
+      </table>
+    </div>
   </div>
 
 
@@ -39,7 +48,7 @@
   <script src="scripts/leaflet.js"></script>
   <!--<script src="scripts/finalProject.js"></script>-->
   <!--<script src="scripts/location.js"></script>-->
-  <script src="scripts/finalProject.js"></script>
+  <script src="scripts/jsFinal1.js"></script>
   <!--<script src="scripts/makeTables.js"></script>-->
 </body>
 </html>

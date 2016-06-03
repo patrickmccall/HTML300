@@ -230,7 +230,7 @@ function makeResultsTable(data) {
     $(".restaurants").append(dataRow);
   }
   // assign the event handler to the rows of the table
-  $(".restaurant:not(#restaurantsHeader)").on("click", viewInspections);
+  $(".restaurant").on("click", viewInspections);
 
 
   //$("#resultsTable").css("display", "inline");
@@ -245,15 +245,15 @@ function viewInspections(evt) {
 }
 
 function makeInspectionsTable(data) {
-  $(".restaurant:not(#restaurantsHeader)").slideUp();
-  //$("#violations").empty();
+  $(".restaurants :not(#restaurantsHeader)").slideToggle();
+  $("#violations").empty();
 
   //sort the data by date
   //http://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
   data.sort(function (a, b) {
     return Date.parse(b.inspection_date) - Date.parse(a.inspection_date);
   })
-  var dataRow = '<div class="list-group-item inspection active" id="inspectionsHeader" >INSPECTIONS</div>';
+
   //loop through the data and build a table from it
   for (var i = 0; i < data.length; i++) {
     var inspectionDate = new Date(data[i].inspection_date);
@@ -263,24 +263,38 @@ function makeInspectionsTable(data) {
     var year = inspectionDate.getFullYear();
     var date = monthIndex + '/' + day + '/' + year;
 
-    var contextClass = getContextClass(data[i].inspection_result);
+    //switch for determining the bootstrap contexual class 
+    var contextClass = "";
+    switch (data[i].inspection_result) {
+      case "Complete":
+        contextClass = "list-group-item-success";
+        break;
+      case "Unsatisfactory":
+        contextClass = "list-group-item-danger";
+        break;
+      case "Satisfactory":
+        contextClass = "list-group-item-success";
+        break;
+      default:
+        contextClass = "list-group-item";
+        break;
 
+    }
 
+    var dataRow = "";
+
+    var dataRow = "";
     dataRow += '  <button class="list-group-item inspection ' + contextClass + '" inspection_id="' + data[i].inspection_serial_num + '">';
     dataRow += '    <div class="inspectionElement" >DATE:   ' + date + '</div>';
     dataRow += '    <div class="inspectionElement" >RESULT: ' + data[i].inspection_result + '</div>';
     dataRow += '    <div class="inspectionElement" >SCORE:  ' + data[i].inspection_score + '</div>';
     dataRow += '  </button>';
 
-
+    $(".inspections").append(dataRow);
   }
-
-  $(".inspections").append(dataRow);
-
   // assign the event handler to the rows of the table
-  $(".inspection:not(#inspectionsHeader)").on("click", viewViolations);
+  $(".inspection").on("click", viewViolations);
   $(".inspections").fadeIn();
-  $(".inspection").fadeIn();
   $("#inspectionsHeader").on("click", inspectionsHeader);
 }
 
@@ -288,35 +302,31 @@ function viewViolations(evt) {
   var inspection_id = evt.currentTarget.attributes.inspection_id.value;
   getViolations(inspection_id);
 }
-
-
 function makeViolationsTable(data) {
   $(".inspection:not(#inspectionsHeader)").fadeOut();
 
-  $(".violations").empty();
+  //sort the data by date
+  //http://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
+  //data.sort(function (a, b) {
+  //  return Number.parse(b.violation_points) - Number.parse(a.violation_points);
+  //})
 
-  //start off the row with the header
-  var dataRow = '<div class="list-group-item violation active" id="violationsHeader">VIOLATIONS</div>';
   //loop through the data and build a table from it
   for (var i = 0; i < data.length; i++) {
-    var contextClass = "";
 
-    contextClass = getContextClass(data[i].violation_type);
-
-    
-    dataRow += '  <div class="list-group-item violation ' + contextClass + '" violation_id="' + data[i].violation_record_id + '">';
+    var dataRow = "";
+    dataRow += '  <div class="list-group-item violation" violation_id="' + data[i].violation_record_id + '">';
     dataRow += '    <div class="violationElement" >TYPE:   ' + data[i].violation_type + '</div>';
     dataRow += '    <div class="violationElement" >DESCRIPTION: ' + data[i].violation_description + '</div>';
     dataRow += '    <div class="violationElement" >POINTS:  ' + data[i].violation_points + '</div>';
     dataRow += '  </div>';
 
     //$("tr").on("click", viewDetails);
-
-    
-
-  }
     $(".violations").append(dataRow);
     $(".violations").fadeIn();
+
+  }
+
 }
 
 function resetRestaurants() {
@@ -324,42 +334,12 @@ function resetRestaurants() {
   $(".restaurantElement").slideDown();
   $(".inspections").fadeOut();
   $(".violations").fadeOut();
-  $(".inspections:not(#inspectionsHeader)").empty();
-  $(".inspectionElement").empty();
-  $(".violations:not(#violationsHeader)").empty();
 }
 
 function inspectionsHeader() {
-  //$(".restaurant:not(#restaurantHeader)").slideUp();
+  $(".restaurant:not(#restaurantHeader)").slideUp();
   //$(".inspections").slideDown();
   $(".inspection").slideDown();
   $(".inspectionElement").slideDown();
   $(".violations").fadeOut();
-  $(".violations:not(#violationsHeader)").empty();
-}
-
-function getContextClass(contextClass) {
-  //switch for determining the bootstrap contexual class 
-  switch (contextClass) {
-    case "Complete":
-      return "list-group-item-success";
-      break;
-    case "Unsatisfactory":
-      return "list-group-item-danger";
-      break;
-    case "Satisfactory":
-      return "list-group-item-success";
-      break;
-    case "blue":
-      return  "list-group-item-info";
-      break;
-    case "red":
-      return "list-group-item-danger";
-      break;
-      
-    default:
-      return "list-group-item";
-      break;
-
-  }
 }

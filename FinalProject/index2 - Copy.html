@@ -14,20 +14,35 @@
 </head>
 <body>
   <span id="testJSON"></span>
-  <div id="leaflet-map" style="height: 500px; position: relative;"></div>
+
+  <style>
+    .violation{
+      height:3em;
+    }
+    .violationElement{
+      display: inline-block;
+      float:left;
+    }
+  </style>
 
 
-
-  <div class="list-group restaurants">
-    <div class="list-group-item restaurant active" id="restaurantsHeader">RESTAURANTS</div>
-  </div>
-
-  <div class="list-group inspections" hidden="hidden">
-    
-  </div>
-
-  <div class="list-group violations" hidden="hidden">
-
+  <div class="list-group violations" hidden="hidden" style="display: block;">
+    <div class="list-group-item active">VIOLATIONS</div>
+    <div class="list-group-item violation" violation_id="IVKYE3Y03">
+      <div class="violationElement">TYPE: red</div>
+      <div class="violationElement">DESCRIPTION: 1600 - Proper cooling procedure</div>
+      <div class="violationElement">POINTS: 25</div>
+    </div>
+    <div class="list-group-item violation" violation_id="IV5ZYXE6P">
+      <div class="violationElement">TYPE: red</div>
+      <div class="violationElement">DESCRIPTION: 2110 - Proper cold holding temperatures (greater than 45 degrees F)</div>
+      <div class="violationElement">POINTS: 10</div>
+    </div>
+    <div class="list-group-item violation" violation_id="IV0R9OAE2">
+      <div class="violationElement">TYPE: red</div>
+      <div class="violationElement">DESCRIPTION: 0600 - Adequate handwashing facilities</div>
+      <div class="violationElement">POINTS: 10</div>
+    </div>
   </div>
 
 
@@ -39,7 +54,7 @@
   <script src="scripts/leaflet.js"></script>
   <!--<script src="scripts/finalProject.js"></script>-->
   <!--<script src="scripts/location.js"></script>-->
-  <script src="scripts/finalProject.js"></script>
+
   <!--<script src="scripts/makeTables.js"></script>-->
 </body>
 </html>
