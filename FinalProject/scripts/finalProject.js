@@ -1,17 +1,19 @@
-﻿var objLocation = new Object;
+﻿var objLocation = new Object();
 objLocation["latLng"] = [];
-var myMap = new Object;
+var myMap = new Object();
 var marker = {};
 var markers = [];
-var layerGroup = new Object;
+var layerGroup = new Object();
 
 $(document).ready(function () {
 
   getLocation();
-})
+});
 
 function getLocation() {
-  var navGeoLoc = navigator.geolocation;
+                   
+  var navGeoLoc = Navigator.geolocation;
+
   if (navGeoLoc) {
     navGeoLoc.getCurrentPosition(
         function successCallback(position) {
@@ -322,11 +324,12 @@ function makeViolationsTable(data) {
 function resetRestaurants() {
   $(".restaurant").slideDown();
   $(".restaurantElement").slideDown();
+
   $(".inspections").fadeOut();
+  $(".inspections").empty();
+
   $(".violations").fadeOut();
-  $(".inspections:not(#inspectionsHeader)").empty();
-  $(".inspectionElement").empty();
-  $(".violations:not(#violationsHeader)").empty();
+  $(".violations").empty();
 }
 
 function inspectionsHeader() {
@@ -334,8 +337,9 @@ function inspectionsHeader() {
   //$(".inspections").slideDown();
   $(".inspection").slideDown();
   $(".inspectionElement").slideDown();
+
   $(".violations").fadeOut();
-  $(".violations:not(#violationsHeader)").empty();
+  $(".violations").empty();
 }
 
 function getContextClass(contextClass) {
