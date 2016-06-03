@@ -322,11 +322,12 @@ function makeViolationsTable(data) {
 function resetRestaurants() {
   $(".restaurant").slideDown();
   $(".restaurantElement").slideDown();
+
   $(".inspections").fadeOut();
+  $(".inspections").empty();
+
   $(".violations").fadeOut();
-  $(".inspections:not(#inspectionsHeader)").empty();
-  $(".inspectionElement").empty();
-  $(".violations:not(#violationsHeader)").empty();
+  $(".violations").empty();
 }
 
 function inspectionsHeader() {
@@ -334,8 +335,9 @@ function inspectionsHeader() {
   //$(".inspections").slideDown();
   $(".inspection").slideDown();
   $(".inspectionElement").slideDown();
+
   $(".violations").fadeOut();
-  $(".violations:not(#violationsHeader)").empty();
+  $(".violations").empty();
 }
 
 function getContextClass(contextClass) {
