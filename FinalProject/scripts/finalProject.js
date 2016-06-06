@@ -120,6 +120,7 @@ function updateMapMarkers(data) {
     //marker.addTo(myMap);
     //marker layer is added to the map
     //add the marker to the layer
+    marker.options.title = data[i].business_id;
     markers.push(marker);
 
   }
@@ -242,8 +243,8 @@ function makeResultsTable(data) {
 }
 
 function viewInspections(evt) {
-  console.log(evt.currentTarget.attributes.business_id.value);
-  var business_id = evt.currentTarget.attributes.business_id.value;
+  console.log(evt.target.title);
+  var business_id = evt.target.title;
   // show the inspections table
   getInspections(business_id);
 }
