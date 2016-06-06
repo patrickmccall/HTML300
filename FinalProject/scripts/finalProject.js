@@ -251,7 +251,9 @@ function viewInspections(evt) {
 
 function makeInspectionsTable(data) {
   $(".restaurant:not(#restaurantsHeader)").slideUp();
-  //$("#violations").empty();
+  $(".inspections").slideUp();
+  $(".inspections").empty();
+  $(".violations").empty();
 
   //sort the data by date
   //http://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
@@ -284,7 +286,7 @@ function makeInspectionsTable(data) {
 
   // assign the event handler to the rows of the table
   $(".inspection:not(#inspectionsHeader)").on("click", viewViolations);
-  $(".inspections").fadeIn();
+  $(".inspections").slideDown();
   $(".inspection").fadeIn();
   $("#inspectionsHeader").on("click", inspectionsHeader);
 }
