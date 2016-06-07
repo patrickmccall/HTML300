@@ -132,7 +132,7 @@ function updateMapMarkers(data) {
 }
 
 function MakePopup(place) {
-  return '<div><h4 id=' + place.business_id + '>' + place.name + '</h4>' +
+  return '<div id=' + place.business_id + '><h4>' + place.name + '</h4>' +
           '<h5>' + place.address + '</h5></div>'
 }
 
@@ -244,7 +244,15 @@ function makeResultsTable(data) {
 
 function viewInspections(evt) {
   console.log(evt.target.title);
-  var business_id = evt.target.title;
+  var business_id = "";
+  if (evt.currentTarget.localName == "button") {
+   business_id = evt.currentTarget.attributes.business_id.value; 
+  }
+  else {
+    business_id = evt.currentTarget.business_id;
+  }
+  
+  
   // show the inspections table
   getInspections(business_id);
 }
@@ -289,6 +297,9 @@ function makeInspectionsTable(data) {
   $(".inspections").slideDown();
   $(".inspection").fadeIn();
   $("#inspectionsHeader").on("click", inspectionsHeader);
+
+  //var mostRecentInpection = $(".inspections:first-child").attr("class");
+  //console.log(mostRecentInpection);
 }
 
 function viewViolations(evt) {
@@ -335,6 +346,8 @@ function resetRestaurants() {
 
   $(".violations").fadeOut();
   $(".violations").empty();
+
+  $(".leaflet-popup-content-wrapper").empty();
 }
 
 function inspectionsHeader() {
@@ -345,6 +358,10 @@ function inspectionsHeader() {
 
   $(".violations").fadeOut();
   $(".violations").empty();
+}
+
+function updateMarker() {
+  $(div)
 }
 
 function getContextClass(contextClass) {
