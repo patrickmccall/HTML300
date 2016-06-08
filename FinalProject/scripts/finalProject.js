@@ -1,9 +1,11 @@
-﻿var objLocation = new Object();
+﻿var objLocation = {};
 objLocation["latLng"] = [];
-var myMap = new Object();
+var myMap = {};
 var marker = {};
 var markers = [];
-var layerGroup = new Object();
+var layerGroup = {};
+var restaurantData = [];
+var inspectionData = [];
 
 $(document).ready(function () {
 
@@ -105,6 +107,8 @@ function getBusinessesByBounds(neLat, neLng, swLat, swLng) {
 }
 
 function ajaxBusinessesSuccess(data) {
+
+  restaurantData = data;
   updateMapMarkers(data);
   makeResultsTable(data)
   $("#restaurantsHeader").on("click",resetRestaurants);
@@ -177,7 +181,9 @@ function getInspections(business_id) {
 
 // callback when getInspections returns data
 function ajaxInspectionsSuccess(data) {
-  makeInspectionsTable(data)
+    inspectionData = data;
+    makeInspectionsTable(data)
+    
 }
 
 
@@ -220,7 +226,7 @@ function ajaxViolationsSuccess(data) {
 function makeResultsTable(data) {
   ////console.log(data);
   ////reset the table
-  //$("#restaurants").empty();
+    $(".restaurant:not(#restaurantsHeader)").remove();
   //$("#inspections").empty();
   //$("#violations").empty();
 
@@ -243,23 +249,25 @@ function makeResultsTable(data) {
 }
 
 function viewInspections(evt) {
-  console.log(evt.target.title);
   var business_id = "";
+    // get the business id from the correct attribute depending on what requested the inspection  either 
+    // a restaurant from the list (button) or from the map marker (img)
   if (evt.currentTarget.localName == "button") {
    business_id = evt.currentTarget.attributes.business_id.value; 
   }
   else {
-    business_id = evt.currentTarget.business_id;
+    business_id = evt.currentTarget.title;
   }
-  
   
   // show the inspections table
   getInspections(business_id);
+  //set the restaurant to the selected business
+  setRestaurant(business_id);
 }
 
 function makeInspectionsTable(data) {
-  $(".restaurant:not(#restaurantsHeader)").slideUp();
-  $(".inspections").slideUp();
+  //$(".restaurant:not(#restaurantsHeader)").slideUp();
+  //$(".inspections").slideUp();
   $(".inspections").empty();
   $(".violations").empty();
 
@@ -294,9 +302,14 @@ function makeInspectionsTable(data) {
 
   // assign the event handler to the rows of the table
   $(".inspection:not(#inspectionsHeader)").on("click", viewViolations);
+
+  //animations for inspections
   $(".inspections").slideDown();
-  $(".inspection").fadeIn();
+    //$(".inspection").fadeIn();
+
+  //on click event for the header
   $("#inspectionsHeader").on("click", inspectionsHeader);
+
 
   //var mostRecentInpection = $(".inspections:first-child").attr("class");
   //console.log(mostRecentInpection);
@@ -305,11 +318,12 @@ function makeInspectionsTable(data) {
 function viewViolations(evt) {
   var inspection_id = evt.currentTarget.attributes.inspection_id.value;
   getViolations(inspection_id);
+  setInspection(inspection_id);
 }
 
 
 function makeViolationsTable(data) {
-  $(".inspection:not(#inspectionsHeader)").fadeOut();
+  //$(".inspection:not(#inspectionsHeader)").fadeOut();
 
   $(".violations").empty();
 
@@ -348,6 +362,9 @@ function resetRestaurants() {
   $(".violations").empty();
 
   $(".leaflet-popup-content-wrapper").empty();
+
+    //reset the table to the original data set
+  makeResultsTable(restaurantData);
 }
 
 function inspectionsHeader() {
@@ -358,9 +375,13 @@ function inspectionsHeader() {
 
   $(".violations").fadeOut();
   $(".violations").empty();
+
+    //reset the inspections table
+  makeInspectionsTable(inspectionData);
 }
 
 function updateMarker() {
+    //TODO change the color of the marker based on the most recent inspection
   $(div)
 }
 
@@ -388,4 +409,30 @@ function getContextClass(contextClass) {
       break;
 
   }
+}
+
+function setRestaurant(business_id) {
+    //loop through the restaurant array and add the selected to the new data array
+    var data = [];
+    for (var i = 0; i < restaurantData.length; i++) {
+        if (restaurantData[i].business_id == business_id) {
+            data.push(restaurantData[i]);
+        }
+    }
+
+    //rebuild the restaurants table using the new set of data
+    makeResultsTable(data);
+}
+
+function setInspection(inspection_id) {
+    //loop through the restaurant array and add the selected to the new data array
+    var data = [];
+    for (var i = 0; i < inspectionData.length; i++) {
+        if (inspectionData[i].inspection_serial_num == inspection_id) {
+            data.push(inspectionData[i]);
+        }
+    }
+
+    //rebuild the inspections table using the new set of data
+    makeInspectionsTable(data);
 }
