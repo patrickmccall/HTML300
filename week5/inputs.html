@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Homework 5 - Inputs</title>
+  <meta charset="utf-8" />
+  <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="scripts/inputs.js"></script>
+  <link rel="stylesheet" href="styles/StyleSheet.css" />
+</head>
+<body>
+  <h1>Homework 5</h1>
+  <h2>Inputs</h2>
+  <form>
+    <table name="inputs">
+      <thead>
+        <tr>
+          <td>Control Type</td>
+          <td>Control</td>
+          <td>Value Entered</td>
+        </tr>
+      </thead>
+      <tr>
+        <td><code>input type="checkbox"</code></td>
+        <td><input type="checkbox" name="checkBox" id="checkBox" class="controls" /></td>
+        <td><label id="checkboxValue" controlLabel="checkBox"></label></td>
+      </tr>
+      <tr>
+        <td><code>input type="radio"</code></td>
+        <td>
+            <input type="radio" name="radio" id="radio" value="radio" class="controls"/> radio<br>
+            <input type="radio" name="radio" id="television" value="television" class="controls"/> television<br>
+            <input type="radio" name="radio" id="theater" value="theater" class="controls"/> theater
+        </td>
+        <td><label id="radioValue" controlLabel="radio" ></label></td>
+      </tr>
+      <tr>
+        <td><code>input type="text"</code></td>
+        <td><input type="text" id="textBox" name="textBox" class="controls"/></td>
+        <td><label id="textboxValue" controlLabel="textBox"></label></td>
+      </tr>
+      <tr>
+        <td><code>textarea</code></td>
+        <td><textarea id="textarea" name="textarea" class="controls"></textarea></td>
+        <td><label id="textareaValue" controlLabel="textarea"></label></td>
+      </tr>
+      <tr>
+        <td><code>select</code></td>
+        <td>
+          <select id="select" name="select" value="select" class="controls">
+            <option value="1st">first</option>
+            <option value="2nd">second</option>
+            <option value="3rd">third</option>
+            <option value="4th">fourth</option>
+          </select>
+        </td>
+        <td><label id="radioValue" controlLabel="select"></label></td>
+      </tr>
+      <tr>
+        <td><code>color</code></td>
+        <td><input type="color" id="color" name="color" class="controls"></td>
+        <td><label id="colorValue" controlLabel="color"></label></td>
+      </tr>
+      <tr>
+        <td><code>number</code></td>
+        <td><input type="number" id="number" name="number" class="controls" min="1" max="10"></td>
+        <td><label id="numberValue" controlLabel="number"></label></td>
+      </tr>
+      
+      <tr>
+        <td><code>datalist</code></td>
+        <td>
+          <input list="datalist">
+          <datalist id="datalist" name="datalist" class="controls">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+          </datalist>
+        </td>
+        <td><label id="datalistValue" controlLabel="datalist"></label></td>
+      </tr>
+
+      
+    </table>
+
+
+  </form>
+
+
+  <footer>
+    <p><a href="../index.html">return to main menu</a></p>
+  </footer>
+  <script src="../scripts/google-analytics.js"></script>
+
+</body>
+</html>
